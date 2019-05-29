@@ -81,10 +81,17 @@ class OperationInitiation extends React.Component {
 
         initiateOperation(operation)
             .then((response) => {
-                if(response.message != null){
+                if(response.message != null && operation.type === "Paiement"){
                     Alert.alert("Succès", response.message,
                         [
-                            {text: "Retour", style : "cancel"}
+                            {text: "Retour", style : "cancel"},
+                            {text: "Afficher le QR code", onPress: () => this.props.navigation.navigate("QrCode", {"amount": response.montant, "code" : response.code})}
+                        ]);
+                }
+                else if(response.message != null && operation.type !== "Paiement"){
+                    Alert.alert("Succès", response.message,
+                        [
+                            {text: "Retour", style : "cancel"},
                         ]);
                 }
                 else if (response.error != null){
@@ -115,7 +122,7 @@ class OperationInitiation extends React.Component {
                         selectedValue={this.state.type}
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({type : itemValue});
-                            console.log(itemValue) }
+                            }
                         }>
                         <Picker.Item label="Dépôt" value="Depot" />
                         <Picker.Item label="Retrait" value="Retrait" />

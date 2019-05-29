@@ -12,16 +12,21 @@ class Mappie extends React.Component {
         }
     }
 
-    _getCoordinates(position, returnJson){
+    _getCoordinates(position, isRegion){
         let coordinates = ((position.split("(")[1]).split(")")[0]).split(" ");
-        if(returnJson) {
+        if(isRegion) {
             return {
                 latitude: parseFloat(coordinates[1]),
-                longitude: parseFloat(coordinates[0])
+                longitude: parseFloat(coordinates[0]),
+                latitudeDelta: 0.0,
+                longitudeDelta: 0.0
             };
         }
         else {
-            return coordinates
+            return {
+                latitude: parseFloat(coordinates[1]),
+                longitude: parseFloat(coordinates[0]),
+            };
         }
     }
 
@@ -30,17 +35,13 @@ class Mappie extends React.Component {
             <View style={styles.container}>
                 <MapView
                 style={styles.map}
-                initialRegion={{
-                    latitude : parseFloat(this._getCoordinates(this.state.store.position, false)[1]),
-                    longitude : parseFloat(this._getCoordinates(this.state.store.position, false)[0]),
-                    latitudeDelta : 0.0,
-                    longitudeDelta: 0.0
-
-                }}>
+                initialRegion={
+                    this._getCoordinates(this.state.store.position, true)
+                }>
                     {this.props.navigation.getParam("stores").map(marker => (
                         <Marker
                             key={marker.id.toString()}
-                            coordinate={this._getCoordinates(marker.position, true)}
+                            coordinate={this._getCoordinates(marker.position, false)}
                             title={marker.name}
                             description={marker.district.name + " , " + marker.area}
                         />

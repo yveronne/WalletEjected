@@ -7,6 +7,7 @@ import WaitingListInsertion from "../Components/WaitingListInsertion"
 import Comment from "../Components/Comment"
 import OperationInitiation from "../Components/OperationInitiation"
 import Mappie from "../Components/Mappie"
+import QrCode from "../Components/QrCode"
 
 
 const stackie = createStackNavigator({
@@ -104,6 +105,20 @@ const stackie = createStackNavigator({
         screen: Mappie,
         navigationOptions: () => ({
             header: null
+        })
+    },
+    QrCode: {
+        screen: QrCode,
+        navigationOptions: () => ({
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
         })
     }
 
