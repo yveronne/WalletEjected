@@ -139,7 +139,6 @@ const styles = EStyleSheet.create({
         borderStyle: "solid",
         borderWidth: 0.5,
         paddingLeft: "$heightie/2",
-        flex: 1
     },
     button: {
         backgroundColor: "#FF0000",
