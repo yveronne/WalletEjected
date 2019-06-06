@@ -5,6 +5,7 @@ import {initiateOperation} from "../API/WalletAPI"
 import EStyleSheet from "react-native-extended-stylesheet"
 import DatePicker from "react-native-datepicker"
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view"
+import moment from "moment"
 
 class OperationInitiation extends React.Component {
 
@@ -21,7 +22,7 @@ class OperationInitiation extends React.Component {
         this.secret = "";
 
         this.state = {
-            date: "",
+            date: null,
             type: "Depot"
         }
     }
@@ -63,6 +64,26 @@ class OperationInitiation extends React.Component {
                                style={styles.input}
                                secureTextEntry={true}
                                keyboardType="numeric"/>
+                </View>
+            )
+        }
+        else if ((field === "validationDate")){
+            return (
+                <View style={styles.item_container}>
+                    <Text style={styles.text}>Date de validation de l'opération</Text>
+                    <View style={styles.datePickerContainer}>
+                        <DatePicker
+                            style={styles.datepicker}
+                            date={this.state.date}
+                            mode="datetime"
+                            placeholder="Choisir une date"
+                            format="YYYY-MM-DD HH:mm:ss"
+                            confirmBtnText="Confirmer"
+                            cancelBtnText="Annuler"
+                            onDateChange={(date) => {this.setState({date: date})}
+                            }
+                        />
+                    </View>
                 </View>
             )
         }
@@ -144,22 +165,7 @@ class OperationInitiation extends React.Component {
                                keyboardType="numeric"/>
                 </View>
                 {this._displayInput("beneficiaryNumber")}
-                <View style={styles.item_container}>
-                    <Text style={styles.text}>Date de validation de l'opération</Text>
-                    <View style={styles.datePickerContainer}>
-                        <DatePicker
-                            style={styles.datepicker}
-                            date={this.state.date}
-                            mode="datetime"
-                            placeholder="Choisir une date"
-                            format="YYYY-MM-DD HH:mm:ss"
-                            confirmBtnText="Confirmer"
-                            cancelBtnText="Annuler"
-                            onDateChange={(date) => {this.setState({date: date})}
-                            }
-                        />
-                    </View>
-                </View>
+                {this._displayInput("validationDate")}
                 {this._displayInput("secret")}
                 <View style={styles.button_container}>
                     <TouchableOpacity onPress={() => this._validate()}

@@ -12,19 +12,29 @@ class Menu extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <MenuItem styles={styles.item}
-                          image={require("../Images/ic_localisation.png")}
-                          text={translate("MENU_openStores")}
-                          type={"stores"}
-                          navigation={this.props.navigation}/>
-                <MenuItem styles={styles.item}
-                          image={require("../Images/ic_cash.png")}
-                          text={translate("MENU_prices")}
-                          type={"prices"}/>
-                <MenuItem styles={styles.item}
-                          image={require("../Images/ic_help.png")}
-                          text={translate("MENU_help")}
-                          type={"help"}/>
+                <View style={styles.row}>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_localisation.png")}
+                              text={translate("MENU_openStores")}
+                              type={"stores"}
+                              navigation={this.props.navigation}/>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_cash.png")}
+                              text={"Valider une transaction"}
+                              type={"transaction"}
+                              navigation={this.props.navigation}/>
+                </View>
+                <View style={styles.row}>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_cash.png")}
+                              text={translate("MENU_prices")}
+                              type={"prices"}/>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_help.png")}
+                              text={translate("MENU_help")}
+                              type={"help"}/>
+                </View>
+
             </View>
         )
     }
@@ -36,6 +46,11 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         alignItems: "center",
         backgroundColor: "#ededed"
+    },
+    row: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-around"
     },
     item: {
         flex: 1

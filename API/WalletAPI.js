@@ -1,4 +1,4 @@
-const URL = "http://192.168.99.37:8000/";
+const URL = "http://192.168.1.5:8000/";
 
 export function getTowns(){
     const url = URL+"towns";
@@ -74,4 +74,22 @@ export function initiateOperation(operation){
     })
         .then(response => response.json())
         .catch(error => console.log("Une erreur est survenue lors de la collecte " +error))
+}
+
+
+export function validateWithdrawal(code, secret){
+    const url = URL+"otp/confirmwithdrawal";
+
+    return fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            "code": code,
+            "secret" : secret
+        })
+    })
+        .then((response) => response.json())
+        .catch((error) => console.log("Une erreur est survenue lors de la collecte " +error))
 }

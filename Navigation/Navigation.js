@@ -8,6 +8,7 @@ import Comment from "../Components/Comment"
 import OperationInitiation from "../Components/OperationInitiation"
 import Mappie from "../Components/Mappie"
 import QrCode from "../Components/QrCode"
+import ValidateWithdrawal from "../Components/ValidateWithdrawal"
 
 
 const stackie = createStackNavigator({
@@ -120,7 +121,21 @@ const stackie = createStackNavigator({
                 marginLeft : 0
             }
         })
-    }
+    },
+    ValidateWithdrawal: {
+        screen: ValidateWithdrawal,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
+        })
+    },
 
 });
 

@@ -13,6 +13,9 @@ class MenuItem extends React.Component {
         }
         else if(title === "help"){
         }
+        else if(title === "transaction"){
+            this.props.navigation.navigate("ValidateWithdrawal")
+        }
     }
     render() {
         return (
