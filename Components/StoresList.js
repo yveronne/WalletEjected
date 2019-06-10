@@ -10,7 +10,7 @@ import EStyleSheet from "react-native-extended-stylesheet"
 class StoresList extends React.Component {
 
     static navigationOptions = ({navigation}) => ({
-        title: translate("NAVIGATION_points") + "-" +navigation.state.params.town
+        title: translate("NAVIGATION_stores") + "-" +navigation.state.params.town
     });
 
     constructor(props){

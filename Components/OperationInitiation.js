@@ -23,7 +23,8 @@ class OperationInitiation extends React.Component {
 
         this.state = {
             date: null,
-            type: "Depot"
+            type: "Depot",
+            isLoading: false
         }
     }
 
@@ -67,7 +68,7 @@ class OperationInitiation extends React.Component {
                 </View>
             )
         }
-        else if ((field === "validationDate")){
+        else if ((this.state.type !== "Paiement") && (field === "validationDate")){
             return (
                 <View style={styles.item_container}>
                     <Text style={styles.text}>Date de validation de l'opération</Text>
@@ -89,7 +90,19 @@ class OperationInitiation extends React.Component {
         }
     }
 
+
+    _displayLoading(){
+        if(this.state.isLoading){
+            return (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large"/>
+                </View>
+            )
+        }
+    }
+
     _validate(){
+        this.setState({isLoading: true});
         var operation = {
             "type" : this.state.type,
             "amount" : this.amount,
@@ -102,6 +115,7 @@ class OperationInitiation extends React.Component {
 
         initiateOperation(operation)
             .then((response) => {
+                this.setState({isLoading: false});
                 if(response.message != null && operation.type === "Paiement"){
                     Alert.alert("Succès", response.message,
                         [
@@ -137,6 +151,7 @@ class OperationInitiation extends React.Component {
             <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
                                      contentContainerStyle={styles.main_container}
                                      enableOnAndroid={false}>
+                {this._displayLoading()}
                 <View style={styles.item_container}>
                     <Text style={styles.text}>Type d'opération</Text>
                     <Picker
@@ -185,6 +200,15 @@ const styles = EStyleSheet.create({
         backgroundColor: "#ededed",
         flexDirection: "column",
         padding : "$heightie/2"
+    },
+    loadingContainer : {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 100,
+        bottom: 0,
+        alignItems: "center",
+        justifyContent: "center"
     },
     item_container: {
         flex: 1,

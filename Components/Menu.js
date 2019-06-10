@@ -20,9 +20,29 @@ class Menu extends React.Component {
                               navigation={this.props.navigation}/>
                     <MenuItem styles={styles.item}
                               image={require("../Images/ic_cash.png")}
-                              text={"Valider une transaction"}
+                              text={translate("MENU_validate")}
                               type={"transaction"}
                               navigation={this.props.navigation}/>
+                </View>
+                <View style={styles.row}>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_cash.png")}
+                              text={translate("MENU_transfer")}
+                              type={"transfer"}/>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_help.png")}
+                              text={translate("MENU_history")}
+                              type={"history"}/>
+                </View>
+                <View style={styles.row}>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_cash.png")}
+                              text={translate("MENU_balance")}
+                              type={"balance"}/>
+                    <MenuItem styles={styles.item}
+                              image={require("../Images/ic_help.png")}
+                              text={translate("MENU_secret")}
+                              type={"secret"}/>
                 </View>
                 <View style={styles.row}>
                     <MenuItem styles={styles.item}

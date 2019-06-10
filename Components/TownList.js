@@ -7,7 +7,7 @@ import translate from "../utils/language.utils"
 class TownList extends React.Component {
 
     static navigationOptions = ({navigation}) => ({
-        title: translate("NAVIGATION_points")
+        title: translate("NAVIGATION_stores")
     });
 
     constructor(props){

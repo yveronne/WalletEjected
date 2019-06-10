@@ -18,6 +18,10 @@ class WaitingListInsertion extends React.Component {
 
         this.customerNumber="";
         this.secret="";
+
+        this.state = {
+            isLoading: false
+        }
     }
 
     _customerNumberInputChanged(text){
@@ -28,11 +32,23 @@ class WaitingListInsertion extends React.Component {
         this.secret = text
     }
 
+    _displayLoading(){
+        if(this.state.isLoading){
+            return (
+                <View style={styles.loadingContainer}>
+                    <ActivityIndicator size="large"/>
+                </View>
+            )
+        }
+    }
+
 
     insert(number, secret, storeId){
+        this.setState({isLoading: true});
         const {goBack} = this.props.navigation;
         insertIntoWaitingList(storeId, number, secret)
             .then((response) => {
+                this.setState({isLoading: false});
                 if(response.message != null){
                     Alert.alert("Succès", response.message,
                         [
@@ -60,6 +76,7 @@ class WaitingListInsertion extends React.Component {
             <KeyboardAwareScrollView resetScrollToCoords={{ x: 0, y: 0 }}
                                      contentContainerStyle={styles.main_container}
                                      enableOnAndroid={false}>
+                {this._displayLoading()}
                 <View style={styles.input_container}>
                     <Text style={styles.text}>{translate("FORM_phone")}</Text>
                     <TextInput style={styles.input} placeholder={translate("PLACEHOLDER_phone")}
@@ -90,6 +107,15 @@ const styles = EStyleSheet.create({
         backgroundColor: "#ededed",
         flexDirection: "column",
         padding : "$heightie"
+    },
+    loadingContainer : {
+        position: "absolute",
+        left: 0,
+        right: 0,
+        top: 100,
+        bottom: 0,
+        alignItems: "center",
+        justifyContent: "center"
     },
     input_container: {
         flex: 2,

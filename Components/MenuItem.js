@@ -31,15 +31,15 @@ class MenuItem extends React.Component {
 
 const styles = EStyleSheet.create({
     item_touchable: {
+        flex: 1,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#FFFFFF",
-        width: "$width/2",
-        height: "$height/4",
         borderRadius: 10,
         borderColor: "#000000",
         borderStyle: "solid",
-        borderWidth: 1
+        borderWidth: 1,
+        margin: 5
     },
     icon: {
 

@@ -1,4 +1,6 @@
-const URL = "http://192.168.1.5:8000/";
+//const URL = "http://192.168.1.5:8000/";
+const URL = "http://192.168.137.52:8000/";
+
 
 export function getTowns(){
     const url = URL+"towns";
@@ -64,10 +66,10 @@ export function initiateOperation(operation){
         body: JSON.stringify({
             "type" : operation.type,
             "amount" : operation.amount,
-            "merchantPointID" : operation.merchantPointID,
+            "merchantpoint" : operation.merchantPointID,
             "expectedvalidationdate" : operation.expectedValidationDate,
-            "customerNumber" : operation.customerNumber,
-            "beneficiaryNumber" : operation.beneficiaryNumber,
+            "customernumber" : operation.customerNumber,
+            "beneficiarynumber" : operation.beneficiaryNumber,
             "secret" : operation.secret
 
         })
