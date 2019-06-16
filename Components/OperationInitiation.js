@@ -1,5 +1,5 @@
 import React from "react"
-import {View, Text, TextInput, TouchableOpacity, Alert, Picker} from "react-native"
+import {View, Text, TextInput, TouchableOpacity, Alert, Picker, ActivityIndicator} from "react-native"
 import translate from "../utils/language.utils"
 import {initiateOperation} from "../API/WalletAPI"
 import EStyleSheet from "react-native-extended-stylesheet"
@@ -10,7 +10,7 @@ import moment from "moment"
 class OperationInitiation extends React.Component {
 
     static navigationOptions = ({navigation}) => ({
-        title: "Initiation de l'opération"
+        title: translate("NAVIGATION_transaction")
     });
 
     constructor(props){
@@ -23,7 +23,7 @@ class OperationInitiation extends React.Component {
 
         this.state = {
             date: null,
-            type: "Depot",
+            type: "Paiement",
             isLoading: false
         }
     }
@@ -48,8 +48,8 @@ class OperationInitiation extends React.Component {
         if((this.state.type === "Depot") && (field === "beneficiaryNumber")){
             return (
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Numéro de téléphone du bénéficiaire</Text>
-                    <TextInput placeholder="Numéro de téléphone du bénéficiaire"
+                    <Text style={styles.text}>{translate("FORM_beneficiary")}</Text>
+                    <TextInput placeholder={translate("FORM_beneficiary")}
                                onChangeText={(text) => this._beneficiaryNumberInputChanged(text)}
                                style={styles.input}
                                keyboardType="numeric"/>
@@ -59,8 +59,8 @@ class OperationInitiation extends React.Component {
         else if ((this.state.type !== "Depot") && (field === "secret")){
             return (
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Code secret</Text>
-                    <TextInput placeholder="Code secret"
+                    <Text style={styles.text}>{translate("FORM_secret")}</Text>
+                    <TextInput placeholder={translate("PLACEHOLDER_secret")}
                                onChangeText={(text) => this._secretInputChanged(text)}
                                style={styles.input}
                                secureTextEntry={true}
@@ -71,13 +71,13 @@ class OperationInitiation extends React.Component {
         else if ((this.state.type !== "Paiement") && (field === "validationDate")){
             return (
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Date de validation de l'opération</Text>
+                    <Text style={styles.text}>{translate("FORM_validationDate")}</Text>
                     <View style={styles.datePickerContainer}>
                         <DatePicker
                             style={styles.datepicker}
                             date={this.state.date}
                             mode="datetime"
-                            placeholder="Choisir une date"
+                            placeholder={translate("PLACEHOLDER_date")}
                             format="YYYY-MM-DD HH:mm:ss"
                             confirmBtnText="Confirmer"
                             cancelBtnText="Annuler"
@@ -153,28 +153,28 @@ class OperationInitiation extends React.Component {
                                      enableOnAndroid={false}>
                 {this._displayLoading()}
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Type d'opération</Text>
+                    <Text style={styles.text}>{translate("FORM_type")}</Text>
                     <Picker
                         selectedValue={this.state.type}
                         onValueChange={(itemValue, itemIndex) => {
                             this.setState({type : itemValue});
                             }
                         }>
-                        <Picker.Item label="Dépôt" value="Depot" />
-                        <Picker.Item label="Retrait" value="Retrait" />
-                        <Picker.Item label="Paiement" value="Paiement" />
+                        <Picker.Item label={translate("paiement")} value="Paiement" />
+                        <Picker.Item label={translate("depot")} value="Depot" />
+                        <Picker.Item label={translate("retrait")} value="Retrait" />
                     </Picker>
                 </View>
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Mon numéro de téléphone</Text>
-                    <TextInput placeholder="Numéro de téléphone"
+                    <Text style={styles.text}>{translate("FORM_phone")}</Text>
+                    <TextInput placeholder={translate("FORM_phone")}
                                onChangeText={(text) => this._customerNumberInputChanged(text)}
                                style={styles.input}
                                keyboardType="numeric"/>
                 </View>
                 <View style={styles.item_container}>
-                    <Text style={styles.text}>Montant</Text>
-                    <TextInput placeholder="Montant"
+                    <Text style={styles.text}>{translate("FORM_amount")}</Text>
+                    <TextInput placeholder={translate("FORM_amount")}
                                onChangeText={(text) => this._amountInputChanged(text)}
                                style={styles.input}
                                keyboardType="numeric"/>
@@ -185,7 +185,7 @@ class OperationInitiation extends React.Component {
                 <View style={styles.button_container}>
                     <TouchableOpacity onPress={() => this._validate()}
                                       style={styles.button}>
-                        <Text style={styles.button_text}>Valider </Text>
+                        <Text style={styles.button_text}>{translate("valider")} </Text>
                     </TouchableOpacity>
                 </View>
 

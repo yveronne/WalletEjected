@@ -1,5 +1,6 @@
-//const URL = "http://192.168.1.5:8000/";
-const URL = "http://192.168.137.52:8000/";
+const URL = "http://192.168.1.5:8000/";
+//const URL = "http://192.168.137.52:8000/";
+// const URL = "http://192.168.43.17:8000/";
 
 
 export function getTowns(){
@@ -37,7 +38,7 @@ export function addComment(comment){
         .catch((error) => console.log("Une erreur est survenue lors de la collecte" + error))
 }
 
-export function insertIntoWaitingList(storeId, customerNumber, secret){
+export function insertIntoWaitingList(storeId, customerNumber, reason){
     const url = URL+"merchantpoints/"+storeId+"/waitingline";
 
     return fetch(url, {
@@ -47,7 +48,7 @@ export function insertIntoWaitingList(storeId, customerNumber, secret){
         },
         body: JSON.stringify({
             "customernumber" : customerNumber,
-            "secret" : secret
+            "reason" : reason
         })
     })
         .then((response) => response.json())
@@ -94,4 +95,22 @@ export function validateWithdrawal(code, secret){
     })
         .then((response) => response.json())
         .catch((error) => console.log("Une erreur est survenue lors de la collecte " +error))
+}
+
+export function getHistory(number, secret){
+    const url = URL+"transactions/history";
+
+    return fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            "number": number,
+            "secret" : secret
+        })
+    })
+        .then((response) => response.json())
+        .catch((error) => console.log("Une erreur est survenue lors de la collecte " +error))
+
 }

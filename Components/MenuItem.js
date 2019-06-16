@@ -7,14 +7,17 @@ class MenuItem extends React.Component {
 
     _showNextView(title){
         if(title === "stores"){
-            this.props.navigation.navigate("TownList");
+            this.props.navigation.navigate("TownList")
+        }
+        else if(title === "transaction"){
+            this.props.navigation.navigate("ValidateWithdrawal")
+        }
+        else if (title === "history"){
+            this.props.navigation.navigate("RequestHistory")
         }
         else if (title === "prices"){
         }
         else if(title === "help"){
-        }
-        else if(title === "transaction"){
-            this.props.navigation.navigate("ValidateWithdrawal")
         }
     }
     render() {

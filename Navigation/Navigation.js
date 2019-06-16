@@ -9,6 +9,9 @@ import OperationInitiation from "../Components/OperationInitiation"
 import Mappie from "../Components/Mappie"
 import QrCode from "../Components/QrCode"
 import ValidateWithdrawal from "../Components/ValidateWithdrawal"
+import History from "../Components/History"
+import OperationDetails from "../Components/OperationDetails"
+import RequestHistory from "../Components/RequestHistory"
 
 
 const stackie = createStackNavigator({
@@ -105,7 +108,15 @@ const stackie = createStackNavigator({
     Map: {
         screen: Mappie,
         navigationOptions: () => ({
-            header: null
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
         })
     },
     QrCode: {
@@ -124,6 +135,48 @@ const stackie = createStackNavigator({
     },
     ValidateWithdrawal: {
         screen: ValidateWithdrawal,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
+        })
+    },
+    RequestHistory: {
+        screen: RequestHistory,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
+        })
+    },
+    History: {
+        screen: History,
+        navigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: "#FF0000"
+            },
+            headerTintColor: "#FFFFFF",
+            headerTitleStyle: {
+                color: "#FFFFFF",
+                fontSize: 13.5,
+                marginLeft : 0
+            }
+        })
+    },
+    OperationDetails: {
+        screen: OperationDetails,
         navigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: "#FF0000"

@@ -26,6 +26,13 @@ class Menu extends React.Component {
                 </View>
                 <View style={styles.row}>
                     <MenuItem styles={styles.item}
+                              image={require("../Images/ic_help.png")}
+                              text={translate("MENU_history")}
+                              type={"history"}
+                              navigation={this.props.navigation}/>
+                </View>
+                <View style={styles.row}>
+                    <MenuItem styles={styles.item}
                               image={require("../Images/ic_cash.png")}
                               text={translate("MENU_prices")}
                               type={"prices"}/>

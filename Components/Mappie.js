@@ -1,8 +1,13 @@
 import React from "react"
 import {StyleSheet, View} from "react-native"
 import MapView, {Marker} from "react-native-maps"
+import translate from "../utils/language.utils";
 
 class Mappie extends React.Component {
+
+    static navigationOptions = () => ({
+        title: translate("NAVIGATION_map")
+    });
 
     constructor(props){
 

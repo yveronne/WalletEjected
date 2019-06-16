@@ -1,24 +1,21 @@
 import React from "react"
-import {View, TextInput, Text, TouchableOpacity, Alert, ActivityIndicator} from "react-native"
-import {insertIntoWaitingList} from "../API/WalletAPI"
+import {View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator} from "react-native"
+import translate from "../utils/language.utils";
+import {addComment, getHistory} from "../API/WalletAPI"
 import EStyleSheet from "react-native-extended-stylesheet"
-import translate from "../utils/language.utils"
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view"
 
-
-
-class WaitingListInsertion extends React.Component {
+class RequestHistory extends React.Component {
 
     static navigationOptions = ({navigation}) => ({
-        title: translate("NAVIGATION_waitinglist")
+        title: translate("NAVIGATION_history")
     });
 
     constructor(props){
         super(props);
 
         this.customerNumber="";
-        this.reason="";
-
+        this.secret="";
         this.state = {
             isLoading: false
         }
@@ -28,8 +25,8 @@ class WaitingListInsertion extends React.Component {
         this.customerNumber = text
     }
 
-    _reasonInputChanged(text){
-        this.reason = text
+    _secretInputChanged(text){
+        this.secret = text
     }
 
     _displayLoading(){
@@ -42,33 +39,14 @@ class WaitingListInsertion extends React.Component {
         }
     }
 
-
-    insert(){
+    getHistory(){
         this.setState({isLoading: true});
-        const {goBack} = this.props.navigation;
-        insertIntoWaitingList(this.props.navigation.getParam("storeId"), this.customerNumber, this.reason)
-            .then((response) => {
+        getHistory(this.customerNumber, this.secret)
+            .then(response => {
                 this.setState({isLoading: false});
-                if(response.message != null){
-                    Alert.alert("Succès", response.message,
-                        [
-                            {text: "OK", onPress: () => goBack()}
-                        ]);
-                }
-                else if (response.error != null){
-                    Alert.alert("Echec", response.error,
-                        [
-                            {text: "Retour", style : "cancel"}
-                        ]);
-                }
-                else {
-                    Alert.alert("Erreur", "Une erreur est survenue. Veuillez réessayer.",
-                        [
-                            {text: "Retour", style : "cancel"}
-                        ]);
-                }
+                this.props.navigation.navigate("History", {operations : response})
             })
-            .catch((error) => console.log(error))
+            .catch(error => console.log(error))
     }
 
     render() {
@@ -84,16 +62,16 @@ class WaitingListInsertion extends React.Component {
                                keyboardType="numeric"/>
                 </View>
                 <View style={styles.input_container}>
-                    <Text style={styles.text}>{translate("FORM_reason")}</Text>
-                    <TextInput placeholder={translate("PLACEHOLDER_reason")}
-                               onChangeText={(text) =>this._reasonInputChanged(text)}
-                               multiline={true} numberOfLines={15}
-                               style={styles.input}/>
+                    <Text style={styles.text}>{translate("FORM_secret")}</Text>
+                    <TextInput style={styles.input} placeholder={translate("PLACEHOLDER_secret")}
+                               onChangeText={(text) => this._secretInputChanged(text)}
+                               secureTextEntry={true}
+                               keyboardType="numeric"/>
                 </View>
                 <View style={styles.button_container}>
-                    <TouchableOpacity onPress={() => {this.insert()}}
+                    <TouchableOpacity onPress={() => {this.getHistory()}}
                                       style={styles.button}>
-                        <Text style={styles.button_text}>{translate("valider")}</Text>
+                        <Text style={styles.button_text}>{translate("valider")} </Text>
                     </TouchableOpacity>
                 </View>
             </KeyboardAwareScrollView>
@@ -158,4 +136,4 @@ const styles = EStyleSheet.create({
     },
 });
 
-export default WaitingListInsertion
+export default RequestHistory

@@ -16,7 +16,6 @@ class QrCode extends React.Component {
         this.state = {
             code : this.props.navigation.getParam("code"),
             amount: this.props.navigation.getParam("amount"),
-            isLoading: true
         }
     }
 

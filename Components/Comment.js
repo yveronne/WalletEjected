@@ -1,5 +1,5 @@
 import React from "react"
-import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native"
+import {View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator} from "react-native"
 import translate from "../utils/language.utils";
 import {addComment} from "../API/WalletAPI"
 import EStyleSheet from "react-native-extended-stylesheet"
