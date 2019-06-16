@@ -41,8 +41,15 @@ export default {
     history_search : "Search a type...",
     beneficiary: "Beneficiary",
     paiement : "Payment",
+    Paiement : "Payment",
     depot : "Deposit",
-    retrait : "Withdrawal"
+    Depot : "Deposit",
+    retrait : "Withdrawal",
+    Retrait : "Withdrawal",
+    store: "Store",
+    validationDate: "Effective validation date",
+    expectedDate: "Expected validation date",
+    initiationDate: "Initiation date"
 
 
 }

@@ -44,7 +44,16 @@ class RequestHistory extends React.Component {
         getHistory(this.customerNumber, this.secret)
             .then(response => {
                 this.setState({isLoading: false});
-                this.props.navigation.navigate("History", {operations : response})
+                if (response.error != null){
+                    Alert.alert("Echec", response.error,
+                        [
+                            {text: "Retour", style : "cancel"}
+                        ]);
+                }
+                else {
+                    this.props.navigation.navigate("History", {operations : response})
+                }
+
             })
             .catch(error => console.log(error))
     }

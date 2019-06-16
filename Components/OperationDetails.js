@@ -33,7 +33,6 @@ class OperationDetails extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                {this._displayLoading()}
                 <View style={styles.text_container}>
                     <Text style={styles.title}> {translate("type") + " :"}  </Text>
                     <Text style={styles.value}>{translate(this.state.operation.type)}</Text>
