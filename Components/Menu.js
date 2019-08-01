@@ -1,5 +1,6 @@
 import React from "react"
 import {View, StyleSheet} from "react-native"
+import EStyleSheet from "react-native-extended-stylesheet"
 import MenuItem from "./MenuItem"
 import translate from "../utils/language.utils"
 
@@ -12,35 +13,19 @@ class Menu extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <View style={styles.row}>
-                    <MenuItem styles={styles.item}
-                              image={require("../Images/ic_localisation.png")}
-                              text={translate("MENU_openStores")}
-                              type={"stores"}
-                              navigation={this.props.navigation}/>
-                    <MenuItem styles={styles.item}
-                              image={require("../Images/ic_cash.png")}
-                              text={translate("MENU_validate")}
-                              type={"transaction"}
-                              navigation={this.props.navigation}/>
-                </View>
-                <View style={styles.row}>
-                    <MenuItem styles={styles.item}
-                              image={require("../Images/ic_help.png")}
-                              text={translate("MENU_history")}
-                              type={"history"}
-                              navigation={this.props.navigation}/>
-                </View>
-                <View style={styles.row}>
-                    <MenuItem styles={styles.item}
-                              image={require("../Images/ic_cash.png")}
-                              text={translate("MENU_prices")}
-                              type={"prices"}/>
-                    <MenuItem styles={styles.item}
-                              image={require("../Images/ic_help.png")}
-                              text={translate("MENU_help")}
-                              type={"help"}/>
-                </View>
+                <MenuItem styles={styles.item}
+                          image={require("../Images/ic_localisation.png")}
+                          text={translate("MENU_openStores")}
+                          type={"stores"}
+                          navigation={this.props.navigation}/>
+                <MenuItem styles={styles.item}
+                          image={require("../Images/ic_proximity.png")}
+                          text={translate("MENU_proximity")}
+                          type={"proximity"}/>
+                <MenuItem styles={styles.item}
+                          image={require("../Images/ic_help.png")}
+                          text={translate("MENU_help")}
+                          type={"help"}/>
             </View>
         )
     }
@@ -49,17 +34,13 @@ class Menu extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
+        flexDirection: "column",
         justifyContent: "space-around",
         alignItems: "center",
         backgroundColor: "#ededed"
     },
-    row: {
-        flex: 1,
-        flexDirection: "row",
-        justifyContent: "space-around"
-    },
     item: {
-        flex: 1
+        flex : 1
     }
 });
 

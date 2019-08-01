@@ -19,6 +19,7 @@ class StoresList extends React.Component {
             isLoading: false,
             stores: []
         };
+        this.town = this.props.navigation.getParam("town");
         this.array = [];
         this.selectedStoreId = null
     }
@@ -28,16 +29,13 @@ class StoresList extends React.Component {
     }
 
     _showWaitingListInsertionPage(storeID){
-        this.props.navigation.navigate("WaitingList", {storeId: storeID })
+        this.props.navigation.navigate("WaitingList", {storeId: storeID , town: this.town})
     }
 
-    _showOperationInitiationPage(storeID){
-        this.props.navigation.navigate("OperationInitiation", {storeId: storeID})
-    }
 
     componentDidMount(){
         this.setState({isLoading : true});
-        getStoresOfTown(this.props.navigation.getParam("town"))
+        getStoresOfTown(this.town)
             .then(data => {
                 this.setState({
                     isLoading: false,
@@ -70,7 +68,8 @@ class StoresList extends React.Component {
         });
 
         const newData = this.array.filter(item => {
-            const itemData = item.district.name.toUpperCase() + item.area.toUpperCase() + item.name.toUpperCase();
+            const itemData = item.district.name.toUpperCase() + item.area.toUpperCase()
+                + item.name.toUpperCase() + item.activity.toUpperCase();
             const textData = text.toUpperCase();
 
             return itemData.indexOf(textData) > -1;
@@ -108,7 +107,7 @@ class StoresList extends React.Component {
                         renderItem={ ({item}) =>
                             <ListItem
                                 key={item.id.toString()}
-                                title={item.name.toUpperCase()}
+                                title={item.name.toUpperCase() + " : " + item.activity}
                                 subtitle={item.district.name + " , " + item.area}
                                 onLongPress={() => {this.selectedStoreId = item.id;
                                                     this.openMenu()}}
@@ -125,7 +124,6 @@ class StoresList extends React.Component {
                         <MenuTrigger text=""/>
                         <MenuOptions>
                             <MenuOption onSelect={() => this._showWaitingListInsertionPage(this.selectedStoreId) } text={translate("NAVIGATION_waitinglist")} />
-                            <MenuOption onSelect={() => this._showOperationInitiationPage(this.selectedStoreId)} text={translate("NAVIGATION_transaction")} />
                             <MenuOption onSelect={() => this._showAddCommentPage(this.selectedStoreId) } text={translate("NAVIGATION_comment")} />
                         </MenuOptions>
                     </Menu>

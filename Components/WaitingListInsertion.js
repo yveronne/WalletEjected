@@ -52,7 +52,8 @@ class WaitingListInsertion extends React.Component {
                 if(response.message != null){
                     Alert.alert("Succès", response.message,
                         [
-                            {text: "OK", onPress: () => goBack()}
+                            // {text: "OK", onPress: () => goBack()}
+                            {text: "OK", onPress: () => this.props.navigation.navigate("StoresList", {town : this.props.navigation.getParam("town")})}
                         ]);
                 }
                 else if (response.error != null){

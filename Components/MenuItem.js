@@ -9,13 +9,8 @@ class MenuItem extends React.Component {
         if(title === "stores"){
             this.props.navigation.navigate("TownList")
         }
-        else if(title === "transaction"){
-            this.props.navigation.navigate("ValidateWithdrawal")
-        }
-        else if (title === "history"){
-            this.props.navigation.navigate("RequestHistory")
-        }
-        else if (title === "prices"){
+        else if(title === "proximity"){
+
         }
         else if(title === "help"){
         }
@@ -34,7 +29,6 @@ class MenuItem extends React.Component {
 
 const styles = EStyleSheet.create({
     item_touchable: {
-        flex: 1,
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#FFFFFF",
@@ -42,7 +36,9 @@ const styles = EStyleSheet.create({
         borderColor: "#000000",
         borderStyle: "solid",
         borderWidth: 1,
-        margin: 5
+        margin: 5,
+        width: "$width/2",
+        height: "$height/4"
     },
     icon: {
 
